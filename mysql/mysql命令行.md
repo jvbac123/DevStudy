@@ -1,4 +1,4 @@
-### MySQL终端命令（不属于SQL语句）
+### MySQL命令行（不属于SQL语句）
 +   查看数据库列表
 ~~~
     show databases;

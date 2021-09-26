@@ -14,3 +14,7 @@ psvm
 ### 切换代码选项卡
 >   alt+← alt+→
 
+### 一个文件编辑方式不对
+右键 Overdrive File Type
+
+
