@@ -1,3 +1,35 @@
+
+
+* [关键字](#关键字)
+* [基础数据类型](#基础数据类型)
+* [修饰符](#修饰符)
+  * [访问控制修饰符](#访问控制修饰符)
+  * [static 修饰符](#static-修饰符)
+    * [静态变量：](#静态变量)
+    * [静态方法：](#静态方法)
+  * [final 修饰符](#final-修饰符)
+      * [final 变量](#final-变量)
+      * [final 方法](#final-方法)
+      * [final 类](#final-类)
+  * [abstract 修饰符](#abstract-修饰符)
+    * [抽象类](#抽象类)
+    * [抽象方法](#抽象方法)
+* [接口和抽象类](#接口和抽象类)
+  * [使用](#使用)
+  * [使用接口](#使用接口)
+  * [声明一个抽象类](#声明一个抽象类)
+* [内部类](#内部类)
+* [包装类](#包装类)
+* [异常](#异常)
+  * [异常的概述和分类](#异常的概述和分类)
+  * [Throwable类常用方法](#throwable类常用方法)
+  * [什么是Exception](#什么是exception)
+  * [Exception处理关键字](#exception处理关键字)
+* [<a href="java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84\.md">常用数据结构</a>](#常用数据结构)
+* [常见问题](#常见问题)
+    * [final、finally、finalize有什么区别](#finalfinallyfinalize有什么区别)
+    * [String类、StringBuffer类与StringBuilder类](#string类stringbuffer类与stringbuilder类)
+
 ## 关键字
 
 ~~~
@@ -212,16 +244,26 @@ boolean        Boolean
 
 ##	异常
 
-### 异常的概述和分类
+### 概述
 
-* A:异常的概述:    异常就是Java程序在运行过程中出现的错误。
-* B:异常的分类:    Exception 和 Error
-* C:异常的继承体系
-  * 异常的基类:    Throwable
-  * 严重问题:    Error    不予处理,因为这种问题一般是很严重的问题，比如: 内存溢出
-  * 非严重问题:    Exception
-    * 编译时异常:  非RuntimeException
-    * 运行时异常:  RuntimeException
+在`Java`语言中，将程序执行中发生的不正常情况称为“异常”(开发过程中的语法错误和逻辑错误不是异常)。
+
+
+
+### 分类
+
+* Exception 
+
+*  Error
+
+  
+
+### 继承体系
+
+* 严重问题:    Error    不予处理,因为这种问题一般是很严重的问题，比如: 内存溢出
+* 非严重问题:    Exception 
+  * 编译时异常:  非RuntimeException
+  * 运行时异常:  RuntimeException
 
 ### Throwable类常用方法
 
@@ -248,7 +290,113 @@ boolean        Boolean
   - • **throw**   -- 用于抛出异常。
   - • **throws** -- 用在方法签名中，用于声明该方法可能抛出的异常。
 
+### 注解
 
+注解（注释，标注，Annotation）的作用 据它所起的作用，大致可分为三类： 
+
++ 编写文档：通过代码里标识的元数据生成文档。 
++ 代码分析：通过代码里标识的元数据对代码进行分析。 
++ 编译检查：通过代码里标识的元数据让编译器能实现基本的编译检查
+
+
+
+##### 基本内置注释
+
+###### @Override
+
+编译时检查，你可以为你的方法添加该注释，以声明该方法是用于覆盖父类中的方法。如果 该方法不是覆盖父类的方法，将会在编译时报错。例如
+
+```java
+class Demo1 extends Demopar{
+    public static void main(String[] args) {
+        Demo1 demo1=new Demo1();
+        demo1.to();
+    }
+    @Override
+    private  void to() {}
+}
+class Demopar{
+    public void nto(){}
+}
+```
+
+
+
+~~~cmd
+>javac de.java
+de.java:8: 错误: 方法不会覆盖或实现超类型的方法
+@Override
+^
+1 个错误
+~~~
+
+###### @Deprecated
+
+对不应该在使用的方法添加注释，当编程人员使用这些方法时，将会在编译时显示提示信息，比如用于标识方法已过时
+
+##### 元注解
+
+用于标识“注解类型‘的”注解“
+
+常见元注解
+
+###### 	@Target
+
+用于标注“被标注的注解”可以出现在哪些位置\
+
+###### @Retention
+
+用于标注“被标注的注解”最终保存在哪
+
+~~~java
+@Retention(RetentionPolicy.SOURCE) //表示该注解只保留在Java源代码中
+@Retention(RetentionPolicy.CLASS) //表示该注解编译后保留在CLASS文件里
+@Retention(RetentionPolicy.RUNTIME) //表示该注解编译后保留在CLASS文件里，并且可以被反射类
+~~~
+
+例如：
+
+~~~java
+package java.lang;
+import java.lang.annotation.*;
+@Target(ElementType.METHOD) //表示该注解只能标识在方法上
+@Retention(RetentionPolicy.SOURCE)
+public @interface Override {
+}
+~~~
+
+#### 定义注解
+
+~~~java
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
+
+@Target(ElementType.METHOD)
+public @interface name {
+    String value();
+    int size() default 0;
+    /*
+        当一个注解中有属性时，那么属性必须赋值
+        除非指定该注解的默认值
+     */
+}
+
+~~~
+
+#### 使用注解
+
+~~~java
+class Demo1  {
+    @name(value = "aa")
+    private  void to() {
+    }
+    @name("aa")//如果一个注解的属性名字是value 该属性可以省略
+    private  void go() {
+
+    }
+}
+
+~~~
 
 
 
