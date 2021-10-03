@@ -398,6 +398,32 @@ class Demo1  {
 
 ~~~
 
+#### 注解属性的类型
+
+注解属性可以是数组
+
++ byte
+
++ short
+
++ int
+
++ long
+
++ float
+
++ double
+
++ boolean
+
++ char
+
++ String
+
++ Class
+
+  
+
 
 
 ## [常用数据结构](java数据结构.md)
