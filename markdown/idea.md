@@ -8,7 +8,14 @@ psvm
 
 ### 快速生成代码
 > Alt+Ins
+### 查找接口的实现类
+
+> Ctrl+H
+
+
+
 ### 最大化代码窗口
+
 >   Ctrl+Shift+F12
 
 ### 切换代码选项卡
@@ -16,5 +23,4 @@ psvm
 
 ### 一个文件编辑方式不对
 右键 Overdrive File Type
-
 
